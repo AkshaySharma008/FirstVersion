@@ -194,6 +194,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingBottom: 16,
     backgroundColor: "#0ea5e9",
+    marginBottom: 12,
   },
   pointsLabel: { color: "#e0f2fe", fontSize: 14 },
   pointsValue: { color: "white", fontSize: 32, fontWeight: "700" },

@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
 import { useCallback, useState } from "react";
 import {
@@ -15,7 +16,7 @@ export default function Login() {
   const [mobile, setMobile] = useState("");
   const [otp, setOtp] = useState("");
 
-  const onLogin = useCallback(() => {
+  const onLogin = useCallback(async () => {
     if (mobile !== "6666666666") {
       Alert.alert(
         "Invalid Mobile",
@@ -27,6 +28,10 @@ export default function Login() {
       Alert.alert("Invalid OTP", "Please enter OTP 999999.");
       return;
     }
+
+    // ✅ Save session
+    await AsyncStorage.setItem("isLoggedIn", "true");
+
     router.replace("/home"); // 👈 use replace so user can't go back to login
   }, [mobile, otp]);
 
