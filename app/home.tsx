@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { CameraView, useCameraPermissions } from "expo-camera";
 import { useRouter } from "expo-router";
@@ -30,9 +31,16 @@ export default function HomeScreen() {
   const [scanned, setScanned] = useState(false);
   const [permission, requestPermission] = useCameraPermissions();
 
-  const onLogout = useCallback(() => {
+  const onLogout = useCallback(async () => {
     // Navigate back to Login explicitly; avoid goBack for web
-    router.replace("/login");
+    try {
+      router.replace("/login");
+      await AsyncStorage.removeItem("isLoggedIn");
+      await AsyncStorage.clear(); // clear everything
+      console.log("User logged out, key removed!");
+    } catch (error) {
+      console.error("Error removing isLoggedIn:", error);
+    }
   }, [navigation]);
 
   const onConfirmPayment = useCallback(() => {
