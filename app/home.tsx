@@ -108,6 +108,14 @@ export default function HomeScreen() {
         >
           <Text style={styles.secondaryBtnText}>Logout</Text>
         </Pressable>
+
+        <Pressable
+          onPress={() => router.push("/ScanAndPay")}
+          style={styles.secondaryBtn}
+          android_ripple={{ color: "#e5e7eb" }}
+        >
+          <Text style={styles.secondaryBtnText}>Redirect to scanner</Text>
+        </Pressable>
       </View>
 
       {/* Scanner Modal */}
